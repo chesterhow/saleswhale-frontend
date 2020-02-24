@@ -56,6 +56,11 @@ const GlobalStyle = createGlobalStyle`
   h4 {
     font-size: 1rem;
     font-weight: 600;
+  }
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 600;
     text-transform: uppercase;
   }
 `;

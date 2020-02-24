@@ -9,6 +9,7 @@ import { ReactComponent as Reports }  from '../images/icon-reports.svg';
 import { ReactComponent as Help }  from '../images/icon-help.svg';
 
 const Container = styled.div`
+  grid-area: sidebar;
   background: ${props => props.theme.accentBlueDark};
   color: ${props => props.theme.white};
   display: grid;
@@ -28,10 +29,7 @@ const ItemContainer = styled.div`
   position: relative;
   height: 80px;
   width: 100%;
-
-  :hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 const LogoItem = styled(ItemContainer)`
