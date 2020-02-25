@@ -1,4 +1,4 @@
-export const API_URL = 'http://my-json-server.typicode.com/chesterhow/saleswhale-mock-api';
+export const API_URL = 'https://my-json-server.typicode.com/chesterhow/saleswhale-mock-api';
 
 export const REQUEST_USER = 'REQUEST_USER';
 export const RECEIVE_USER = 'RECEIVE_USER';
