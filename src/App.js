@@ -7,11 +7,7 @@ import Sidebar from './components/Sidebar';
 import GlobalStyle from './stylesheets/global-styles';
 
 const Container = styled.div`
-  display: grid;
-  grid-template:
-    "sidebar nav" 80px
-    "sidebar main" auto
-    / 80px auto;
+  margin-left: 80px;
 `;
 
 function App() {

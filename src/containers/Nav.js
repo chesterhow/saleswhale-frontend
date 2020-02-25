@@ -11,10 +11,11 @@ const Container = styled.div`
   grid-area: nav;
   display: grid;
   grid-template-columns: auto auto 1fr;
+  position: relative;
   z-index: 2;
-  background: ${props => props.theme.white};
   justify-items: center;
   align-items: center;
+  background: ${props => props.theme.white};
   border-bottom: 1px solid ${props => props.theme.greyLight};
 `;
 

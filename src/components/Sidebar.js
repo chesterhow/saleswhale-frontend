@@ -10,12 +10,17 @@ import { ReactComponent as Help }  from '../images/icon-help.svg';
 
 const Container = styled.div`
   grid-area: sidebar;
-  background: ${props => props.theme.accentBlueDark};
-  color: ${props => props.theme.white};
+  position: fixed;
+  left: 0;
+  top: 0;
   display: grid;
   grid-template-rows: repeat(5, auto) 1fr auto;
   justify-items: center;
   align-items: center;
+  height: 100vh;
+  width: 80px;
+  background: ${props => props.theme.accentBlueDark};
+  color: ${props => props.theme.white};
 
   svg {
     position: absolute;

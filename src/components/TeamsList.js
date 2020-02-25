@@ -30,7 +30,7 @@ const Heading = styled.div`
 
 const List = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 1rem;
   padding: 2rem;
 `;

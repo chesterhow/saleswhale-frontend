@@ -47,6 +47,7 @@ const Button = styled.button`
   color: ${props => props.theme.white};
   border: none;
   border-radius: 4px;
+  cursor: pointer;
 
   svg {
     margin-right: 1rem;
@@ -64,6 +65,7 @@ const Tab = styled.button`
   border: none;
   border-bottom: 3px solid ${props => props.active ? props.theme.accentBlue : props.theme.white};
   color: ${props => props.active ? props.theme.accentBlue : props.theme.black};
+  cursor: pointer;
 
   h2 {
     margin: 0;
