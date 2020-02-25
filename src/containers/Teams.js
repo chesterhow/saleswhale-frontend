@@ -1,5 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+
+import { fetchTeams } from '../actions';
+import TeamsList from '../components/TeamsList';
 
 import { ReactComponent as TeamsIcon }  from '../images/icon-teams.svg';
 import { ReactComponent as PlusIcon }  from '../images/icon-plus.svg';
@@ -15,6 +19,7 @@ const Top = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   padding: 2rem 0;
+  align-items: center;
 
   * {
     vertical-align: middle;
@@ -78,27 +83,51 @@ const Search = styled.input`
   }
 `;
 
-function Teams() {
-  return (
-    <div>
-      <Header>
-        <Top>
-          <TeamsIcon />
-          <Heading>Teams</Heading>
-          <Button>
-            <PlusIcon />
-            <h5>Create new team</h5>
-          </Button>
-        </Top>
-        <Bottom>
-          <Tab active><h2>All</h2></Tab>
-          <Tab><h2>Favourites</h2></Tab>
-          <Tab><h2>Archived</h2></Tab>
-          <Search type="text" placeholder="Search team name ..." />
-        </Bottom>
-      </Header>
-    </div>
-  );
+const Content = styled.div`
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-column-gap: 2rem;
+`;
+
+class Teams extends React.Component {
+  componentDidMount() {
+    const { dispatch, fetchTeams } = this.props;
+    dispatch(fetchTeams());
+  }
+
+  render() {
+    return (
+      <div>
+        <Header>
+          <Top>
+            <TeamsIcon />
+            <Heading>Teams</Heading>
+            <Button>
+              <PlusIcon />
+              <h5>Create new team</h5>
+            </Button>
+          </Top>
+          <Bottom>
+            <Tab active><h2>All</h2></Tab>
+            <Tab><h2>Favourites</h2></Tab>
+            <Tab><h2>Archived</h2></Tab>
+            <Search type="text" placeholder="Search team name ..." />
+          </Bottom>
+        </Header>
+        <Content>
+          <TeamsList teams={this.props.teams} />
+          <div>Activities</div>
+        </Content>
+      </div>
+    );
+  }
 }
 
-export default Teams;
+const mapStateToProps = (state) => ({
+  teams: state.teams.teams,
+  isFetching: state.teams.isFetching,
+  fetchTeams: fetchTeams
+})
+
+export default connect(mapStateToProps)(Teams);

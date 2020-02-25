@@ -10,7 +10,8 @@ const theme = {
   accentBlueLight: '#F1F4F8',
   accentGreen: '#40D2BF',
   grey: '#999999',
-  greyLight: '#EFEFEF'
+  greyLight: '#E4E7EC',
+  greyLightAlt: '#EBEEF2'
 };
 
 export default theme;

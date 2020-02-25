@@ -19,13 +19,35 @@ function receiveUser(json) {
     type: RECEIVE_USER,
     user: json
   }
-};
+}
 
 export function fetchUser() {
   return dispatch => {
-    dispatch(requestUser())
+    dispatch(requestUser());
     return fetch(`${API_URL}/current_user`)
       .then(response => response.json())
       .then(json => dispatch(receiveUser(json)));
+  }
+}
+
+function requestTeams() {
+  return {
+    type: REQUEST_TEAMS
+  }
+}
+
+function receiveTeams(json) {
+  return {
+    type: RECEIVE_TEAMS,
+    teams: json
+  }
+}
+
+export function fetchTeams() {
+  return dispatch => {
+    dispatch(requestTeams());
+    return fetch(`${API_URL}/teams`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveTeams(json)));
   }
 }
