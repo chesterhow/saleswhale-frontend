@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Teams from './containers/Teams';
-import Nav from './components/Nav';
+import Nav from './containers/Nav';
 import Sidebar from './components/Sidebar';
 import GlobalStyle from './stylesheets/global-styles';
 

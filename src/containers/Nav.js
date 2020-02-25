@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+
+import { fetchUser } from '../actions';
 
 import { ReactComponent as Mail } from '../images/icon-mail.svg';
 import { ReactComponent as Caret } from '../images/caret-down.svg';
@@ -92,7 +95,7 @@ const Profile = styled.div`
   }
 `;
 
-const DisplayPicture = styled.div`
+const DisplayPicture = styled.img`
   display: inline-block;
   height: 2rem;
   width: 2rem;
@@ -101,24 +104,38 @@ const DisplayPicture = styled.div`
   background: ${props => props.theme.grey};
 `;
 
-function Nav() {
-  return (
-    <Container>
-      <Appname>Narwhal</Appname>
-      <Breadcrumbs>Teams</Breadcrumbs>
-      <Personal>
-        <Notif>
-          <Mail />
-          <Badge>3</Badge>
-        </Notif>
-        <Name>Hello, John</Name>
-        <Profile>
-          <DisplayPicture />
-          <Caret />
-        </Profile>
-      </Personal>
-    </Container>
-  );
+class Nav extends React.Component {
+  componentDidMount() {
+    const { dispatch, fetchUser } = this.props;
+    dispatch(fetchUser());
+  }
+
+  render() {
+    const { user } = this.props;
+    return (
+      <Container>
+        <Appname>Narwhal</Appname>
+        <Breadcrumbs>Teams</Breadcrumbs>
+        <Personal>
+          <Notif>
+            <Mail />
+            <Badge>{user.notifications_count}</Badge>
+          </Notif>
+          <Name>Hello, {user.name}</Name>
+          <Profile>
+            <DisplayPicture src={user.avatar} />
+            <Caret />
+          </Profile>
+        </Personal>
+      </Container>
+    );
+  }
 }
 
-export default Nav;
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+  isFetching: state.user.isFetching,
+  fetchUser: fetchUser
+});
+
+export default connect(mapStateToProps)(Nav);
