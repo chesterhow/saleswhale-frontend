@@ -51,3 +51,25 @@ export function fetchTeams() {
       .then(json => dispatch(receiveTeams(json)));
   }
 }
+
+function requestActivities() {
+  return {
+    type: REQUEST_ACTIVITIES
+  }
+}
+
+function receiveActivities(json) {
+  return {
+    type: RECEIVE_ACTIVITIES,
+    activities: json
+  }
+}
+
+export function fetchActivities() {
+  return dispatch => {
+    dispatch(requestActivities());
+    return fetch(`${API_URL}/activities`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveActivities(json)));
+  }
+}

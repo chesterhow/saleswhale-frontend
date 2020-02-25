@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { fetchTeams } from '../actions';
+import { fetchTeams, fetchActivities } from '../actions';
 import TeamsList from '../components/TeamsList';
+import Activities from '../components/Activities';
 
 import { ReactComponent as TeamsIcon }  from '../images/icon-teams.svg';
 import { ReactComponent as PlusIcon }  from '../images/icon-plus.svg';
@@ -85,8 +86,9 @@ const Search = styled.input`
 const Content = styled.div`
   padding: 3rem;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 21rem;
   grid-column-gap: 2rem;
+  align-items: start;
 `;
 
 class Teams extends React.Component {
@@ -102,12 +104,13 @@ class Teams extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, fetchTeams } = this.props;
+    const { dispatch, fetchTeams, fetchActivities } = this.props;
     dispatch(fetchTeams());
+    dispatch(fetchActivities());
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.isFetching && !this.props.isFetching) {
+    if (prevProps.teamsIsFetching && !this.props.teamsIsFetching) {
       this.setState((state, props) => ({
         teams: props.teams
       }));
@@ -137,7 +140,7 @@ class Teams extends React.Component {
   }
 
   render() {
-    const { teams } = this.props;
+    const { teams, activities } = this.props;
 
     return (
       <div>
@@ -174,7 +177,7 @@ class Teams extends React.Component {
         </Header>
         <Content>
           <TeamsList teams={this.state.teams} total={teams.length} />
-          <div>Activities</div>
+          <Activities activities={activities} />
         </Content>
       </div>
     );
@@ -183,8 +186,11 @@ class Teams extends React.Component {
 
 const mapStateToProps = (state) => ({
   teams: state.teams.teams,
-  isFetching: state.teams.isFetching,
-  fetchTeams: fetchTeams
+  teamsIsFetching: state.teams.isFetching,
+  activities: state.activities.activities,
+  activitiesIsFetching: state.activities.isFetching,
+  fetchTeams: fetchTeams,
+  fetchActivities: fetchActivities
 })
 
 export default connect(mapStateToProps)(Teams);
