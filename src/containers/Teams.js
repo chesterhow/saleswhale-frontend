@@ -57,9 +57,14 @@ const Button = styled.button`
     display: inline-block;
     margin: 0;
   }
+
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 const Tab = styled.button`
+  margin: 0;
   padding: 0;
   background: none;
   border: none;
@@ -70,6 +75,11 @@ const Tab = styled.button`
   h2 {
     margin: 0;
     padding: 0.5rem 1rem;
+  }
+
+  :hover {
+    color: ${props => props.active ? props.theme.accentBlue : props.theme.accentBlueDark};
+    border-bottom: 3px solid ${props => props.active ? props.theme.accentBlue : props.theme.accentBlueDark};
   }
 `;
 
