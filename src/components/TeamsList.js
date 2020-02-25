@@ -36,8 +36,10 @@ const List = styled.div`
 `;
 
 function TeamsList(props) {
+  const { teams, total } = props;
+
   function renderTeams() {
-    return props.teams.map((team) => (
+    return teams.map((team) => (
       <TeamCard key={team.id} team={team} />
     ));
   }
@@ -46,7 +48,7 @@ function TeamsList(props) {
     <Container>
       <Heading>
         <h2>Teams</h2>
-        <p>Showing 9 out of 9 teams</p>
+        <p>Showing {teams.length} out of {total} teams</p>
       </Heading>
       <List>
         {renderTeams()}

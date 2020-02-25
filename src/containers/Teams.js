@@ -19,7 +19,6 @@ const Top = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   padding: 2rem 0;
-  align-items: center;
 
   * {
     vertical-align: middle;
@@ -62,7 +61,7 @@ const Tab = styled.button`
   padding: 0;
   background: none;
   border: none;
-  border-bottom: ${props => props.active ? '3px solid' + props.theme.accentBlue : 'none'};
+  border-bottom: 3px solid ${props => props.active ? props.theme.accentBlue : props.theme.white};
   color: ${props => props.active ? props.theme.accentBlue : props.theme.black};
 
   h2 {
@@ -91,12 +90,55 @@ const Content = styled.div`
 `;
 
 class Teams extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tab: 1,
+      teams: []
+    };
+
+    this.handleTabClick = this.handleTabClick.bind(this);
+  }
+
   componentDidMount() {
     const { dispatch, fetchTeams } = this.props;
     dispatch(fetchTeams());
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isFetching && !this.props.isFetching) {
+      this.setState((state, props) => ({
+        teams: props.teams
+      }));
+    }
+
+    if (prevState.tab !== this.state.tab) {
+      let teams = this.props.teams;
+
+      if (this.state.tab === 2) {
+        teams = teams.filter(team => team.is_favorited);
+      } else if (this.state.tab === 3) {
+        teams = teams.filter(team => team.is_archived);
+      }
+
+      this.setState(() => ({
+        teams: teams
+      }));
+    }
+  }
+
+  handleTabClick(tab) {
+    if (tab !== this.state.tab) {
+      this.setState(() => ({
+        tab: tab
+      }));
+    }
+  }
+
   render() {
+    const { teams } = this.props;
+
     return (
       <div>
         <Header>
@@ -109,14 +151,29 @@ class Teams extends React.Component {
             </Button>
           </Top>
           <Bottom>
-            <Tab active><h2>All</h2></Tab>
-            <Tab><h2>Favourites</h2></Tab>
-            <Tab><h2>Archived</h2></Tab>
+            <Tab
+              active={this.state.tab === 1}
+              onClick={() => this.handleTabClick(1)}
+            >
+              <h2>All</h2>
+            </Tab>
+            <Tab
+              active={this.state.tab === 2}
+              onClick={() => this.handleTabClick(2)}
+            >
+              <h2>Favourites</h2>
+            </Tab>
+            <Tab
+              active={this.state.tab === 3}
+              onClick={() => this.handleTabClick(3)}
+            >
+              <h2>Archived</h2>
+            </Tab>
             <Search type="text" placeholder="Search team name ..." />
           </Bottom>
         </Header>
         <Content>
-          <TeamsList teams={this.props.teams} />
+          <TeamsList teams={this.state.teams} total={teams.length} />
           <div>Activities</div>
         </Content>
       </div>
