@@ -4,7 +4,7 @@ const theme = {
 
   // Colors
   white: '#FFF',
-  black: '##1A1919',
+  black: '#1A1919',
   accentBlue: '#2995DA',
   accentBlueDark: '#042235',
   accentBlueLight: '#F1F4F8',

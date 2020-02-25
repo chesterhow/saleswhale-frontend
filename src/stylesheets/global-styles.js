@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${props => props.theme.sansSerif};
   }
 
-  html, body, #root, #root>div {
+  html, body, #root, #root > div {
     height: 100%
   }
 

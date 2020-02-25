@@ -8,9 +8,11 @@ const Container = styled.div`
   grid-area: nav;
   display: grid;
   grid-template-columns: auto auto 1fr;
+  z-index: 2;
   background: ${props => props.theme.white};
   justify-items: center;
   align-items: center;
+  border-bottom: 1px solid ${props => props.theme.greyLight};
 `;
 
 const Appname = styled.h2`
